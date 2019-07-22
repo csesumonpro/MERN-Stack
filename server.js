@@ -14,3 +14,4 @@ app.use('/api/auth',require('./routes/api/auth'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT,()=>`Server started on PORT ${PORT}`)
+
