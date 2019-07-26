@@ -42,7 +42,7 @@ check('skills','Skills field is required!').not().isEmpty(),
     if(status)  profileFields.status = status;
     if(githubusername)  profileFields.githubusername = githubusername;
     if(skills){
-        profileFields.skills = skills.split(',').map(skill=>skill.trim()) 
+        profileFields.skills = skills.split(',').map(skill=>skill.trim()); 
     }
 //   Build Social Object
     profileFields.social = {};
@@ -68,6 +68,36 @@ check('skills','Skills field is required!').not().isEmpty(),
         return res.json(profile);
     } catch (error) {
         console.log(error.message);
+        res.status(500).send('Server Error')
+    }
+});
+//@route GET api/profile/
+//@desc get all user
+//@access Public
+router.get('/',async (req,res)=>{
+    try {
+        const profiles = await Profile.find().populate('user',['avatar','name']);
+        res.json(profiles);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Server Error')
+    }
+});
+//@route GET api/profile/
+//@desc get all user
+//@access Public
+router.get('/user/:user_id',async (req,res)=>{
+    try {
+        const profile = await Profile.findOne({user:req.params.user_id}).populate('user',['avatar','name']);
+        if(!profile){
+            return res.status(400).json({msg:"Profile Not Found...!"});
+        }
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        if(error.kind=='ObjectId'){
+            return res.status(400).json({msg:"Profile Not Found...!"});
+        }
         res.status(500).send('Server Error')
     }
 });
