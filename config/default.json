@@ -1,4 +1,6 @@
 {
     "mongoURI":"mongodb+srv://admin:admin@dev-lcjkt.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret":"mysecretkey"
+    "jwtSecret":"mysecretkey",
+    "githubClientId":"021b72d9cc3c5cc15486",
+    "githubClientSecret":"0faf86059d474fe4d9ac7ac478b5870ac125bc77"
 }
