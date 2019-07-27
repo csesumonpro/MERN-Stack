@@ -1,6 +1,6 @@
 import React, { Fragment,useState } from 'react'
 import {Link} from 'react-router-dom'
-
+import axios from 'axios'
 const Register = () => {
     const [formData,setFormData] = useState({
         name:'',
@@ -10,12 +10,12 @@ const Register = () => {
     });
     const {name,email,password,confirm_password} = formData
     const changeValue = e=> setFormData({...formData,[e.target.name]:e.target.value});
-    const registerUser = e=>{
+    const  registerUser = async e=>{
         e.preventDefault();
         if(password!=confirm_password){
             console.log('Password and confirm password does not match');
         }else{
-            console.log(formData)
+         console.log('Success')
         }
     }
     return (
